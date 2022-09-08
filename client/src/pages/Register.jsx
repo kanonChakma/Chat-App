@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
 import axios from "axios";
-import styled from "styled-components";
-import { useNavigate, Link } from "react-router-dom";
-import Logo from "../assets/logo.svg";
-import { ToastContainer, toast } from "react-toastify";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import styled from "styled-components";
+import Logo from "../assets/logo.svg";
 import { registerRoute } from "../utils/allRoutes";
 
 export default function Register() {
@@ -27,7 +27,7 @@ export default function Register() {
     if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
       navigate("/");
     }
-  }, []);
+  }, [navigate]);
 
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
@@ -60,7 +60,7 @@ export default function Register() {
 
     return true;
   };
-
+ console.log(values);
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (handleValidation()) {
@@ -70,7 +70,7 @@ export default function Register() {
         email,
         password,
       });
-
+    console.log(data);
       if (data.status === false) {
         toast.error(data.msg, toastOptions);
       }
@@ -85,7 +85,7 @@ export default function Register() {
   };
 
   return (
-    <>
+    <div>
       <FormContainer>
         <form action="" onSubmit={(event) => handleSubmit(event)}>
           <div className="brand">
@@ -123,7 +123,7 @@ export default function Register() {
         </form>
       </FormContainer>
       <ToastContainer />
-    </>
+    </div>
   );
 }
 
