@@ -1,4 +1,4 @@
-import User from "../../../server/model/userModel.js";
+import User from "../model/userModel.js";
 
 export const authCheck = async(req, res, next) => {
    try {
