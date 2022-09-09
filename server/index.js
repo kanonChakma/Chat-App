@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv';
 import express from 'express';
 import mongoose from "mongoose";
 import authRoutes from "./routes/authRoutes.js";
+import messageRoutes from "./routes/messageRoutes.js";
 dotenv.config()
 
 const app = express();
@@ -12,10 +13,9 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/messages", messageRoutes);
 
-
- const url=`mongodb+srv://kanonchakma1:kanon121chakma@cluster0.u7xm9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
-mongoose.connect(url, {
+mongoose.connect(process.env.DB_URL, {
    useNewUrlParser: true,
    useUnifiedTopology: true,
 })
