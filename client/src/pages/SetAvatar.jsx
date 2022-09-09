@@ -6,13 +6,15 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styled from "styled-components";
 import loader from "../assets/loader.gif";
-import { setAvatarRoute } from "../utils/APIRoutes";
+import { setAvatarRoute } from "../utils/allRoutes";
+
 export default function SetAvatar() {
   const api = `https://api.multiavatar.com/4645646`;
   const navigate = useNavigate();
   const [avatars, setAvatars] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedAvatar, setSelectedAvatar] = useState(undefined);
+  
   const toastOptions = {
     position: "bottom-right",
     autoClose: 8000,
@@ -21,10 +23,29 @@ export default function SetAvatar() {
     theme: "dark",
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY))
       navigate("/login");
-  }, []);
+  }, [navigate]);
+
+  useEffect(() => {
+    const getAvatar = async() => {
+      const data = [];
+      for (let i = 0; i < 4; i++) {
+        const image = await axios.get(
+          `${api}/${Math.round(Math.random() * 1000)}`
+        );
+
+        const buffer = Buffer.from(image.data, 'utf-8').toString('base64');
+        data.push(buffer.toString("base64"));
+      }
+      console.log("data inside is ",data);
+      console.log(data);
+      setAvatars(data);
+      setIsLoading(false);
+    }
+    getAvatar();
+  }, [api]);
 
   const setProfilePicture = async () => {
     if (selectedAvatar === undefined) {
@@ -52,18 +73,8 @@ export default function SetAvatar() {
     }
   };
 
-  useEffect(async () => {
-    const data = [];
-    for (let i = 0; i < 4; i++) {
-      const image = await axios.get(
-        `${api}/${Math.round(Math.random() * 1000)}`
-      );
-      const buffer = new Buffer(image.data);
-      data.push(buffer.toString("base64"));
-    }
-    setAvatars(data);
-    setIsLoading(false);
-  }, []);
+
+  console.log(avatars);
   return (
     <>
       {isLoading ? (
