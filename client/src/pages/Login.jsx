@@ -7,7 +7,7 @@ import styled from "styled-components";
 import Logo from "../assets/logo.svg";
 import { loginRoute } from "../utils/allRoutes";
 
-export default function Login() {
+const Login = () =>{
   const navigate = useNavigate();
   const [values, setValues] = useState({ username: "", password: "" });
   const toastOptions = {
@@ -92,6 +92,8 @@ export default function Login() {
     </>
   );
 }
+
+export default Login;
 
 const FormContainer = styled.div`
   height: 100vh;

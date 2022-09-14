@@ -12,10 +12,10 @@ export const register = async (req, res, next) => {
           return res.json({ msg: "Email already used", status: false });
         
           const hashedPassword = await bcrypt.hash(password, 10);
-        const user = await User.create({
+        const user = await User.create ({
           email,
           username,
-          password: hashedPassword,
+                 password: hashedPassword,
         });
         delete user.password;
         return res.json({ status: true, user });
@@ -71,6 +71,16 @@ export const getAllUsers = async (req, res, next) => {
       "_id",
     ]);
     return res.json(users);
+  } catch (ex) {
+    next(ex);
+  }
+};
+
+export const logOut = async(req, res, next) => {
+  try {
+    if (!req.params.id) return res.json({ msg: "User id is required " });
+     await User.deleteOne(req.params.id);
+    return res.status(200).send();
   } catch (ex) {
     next(ex);
   }

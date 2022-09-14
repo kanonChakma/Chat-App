@@ -4,7 +4,7 @@ import { BsEmojiSmileFill } from "react-icons/bs";
 import { IoMdSend } from "react-icons/io";
 import styled from "styled-components";
 
-export default function ChatInput({ handleSendMsg }) {
+const ChatInput = ({ handleSendMsg }) => {
   const [msg, setMsg] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const handleEmojiPickerhideShow = () => {
@@ -141,3 +141,5 @@ const Container = styled.div`
     }
   }
 `;
+
+export default ChatInput;
