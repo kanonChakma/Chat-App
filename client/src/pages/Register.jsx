@@ -7,7 +7,7 @@ import styled from "styled-components";
 import Logo from "../assets/logo.svg";
 import { registerRoute } from "../utils/allRoutes";
 
-export default function Register() {
+const Register = () => {
   const navigate = useNavigate();
   const toastOptions = {
     position: "bottom-right",
@@ -194,3 +194,5 @@ const FormContainer = styled.div`
     }
   }
 `;
+
+export default Register;

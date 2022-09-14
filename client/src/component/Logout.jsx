@@ -3,7 +3,7 @@ import { BiPowerOff } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-export default function Logout() {
+const Logout = () =>{
 
   const navigate = useNavigate();
   
@@ -44,3 +44,5 @@ const Button = styled.button`
     color: #ebe7ff;
   }
 `;
+
+export default Logout;

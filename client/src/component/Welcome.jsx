@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Robot from "../assets/robot.gif";
 
-export default function Welcome() {
+const Welcome = () =>{
   const [userName, setUserName] = useState("");
   
   useEffect(() => {
@@ -39,3 +39,5 @@ const Container = styled.div`
     color: #4e0eff;
   }
 `;
+
+export default Welcome;
